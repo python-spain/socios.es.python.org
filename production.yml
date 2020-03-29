@@ -1,0 +1,63 @@
+version: '3'
+
+volumes:
+  production_postgres_data: {}
+  production_postgres_data_backups: {}
+  production_media: {}
+  production_static: {}
+
+services:
+
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: pythonspain_production_django
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.env
+  volumes:
+      - production_media:/data/media
+      - production_static:/data/static
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: pythonspain_production_postgres
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data
+      - production_postgres_data_backups:/backups
+    env_file:
+      - ./.env
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/production/nginx/Dockerfile
+    depends_on:
+      - django
+    env_file:
+      - ./.env
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+    volumes:
+      - production_media:/data/media
+      - production_static:/data/static
+
+  redis:
+    image: redis:3.2
+
+  celeryworker:
+    <<: *django
+    image: pythonspain_production_celeryworker
+    command: /start-celeryworker
+
+  celerybeat:
+    <<: *django
+    image: pythonspain_production_celerybeat
+    command: /start-celerybeat

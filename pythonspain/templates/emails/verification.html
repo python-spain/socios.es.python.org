@@ -1,0 +1,9 @@
+
+{% extends "emails/base.html" %}
+{% load i18n %}
+{% block content %}
+<a href="https://{{ site.domain }}/verified/{{ user.verification_code }}/">
+  {% trans "Verify email address" %}
+</a>
+{% endblock content %}
+
