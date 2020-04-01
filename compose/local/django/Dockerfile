@@ -1,4 +1,4 @@
-FROM python:3.7-slim-buster
+FROM python:3.8-slim-buster
 
 ENV PYTHONUNBUFFERED 1
 
@@ -17,7 +17,7 @@ RUN apt-get update \
 
 
 RUN addgroup --system django \
-    && adduser --system --ingroup django django
+  && adduser --system --ingroup django django
 
 # Requirements are installed here to ensure they will be cached.
 RUN pip install poetry

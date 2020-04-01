@@ -1,4 +1,4 @@
-FROM python:3.7-slim-buster
+FROM python:3.8-slim-buster
 
 ENV PYTHONUNBUFFERED 1
 
@@ -50,6 +50,11 @@ RUN chown django /start-celerybeat
 
 COPY . /app
 
+RUN mkdir /data
+RUN mkdir /data/media
+RUN mkdir /data/static
+
+RUN chown -R django:django /data/
 RUN chown -R django /app
 
 USER django

@@ -6,7 +6,7 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["es.python.org"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[".es.python.org"])
 
 # DATABASES
 # ------------------------------------------------------------------------------
@@ -64,16 +64,11 @@ X_FRAME_OPTIONS = "DENY"
 
 # STATIC
 # ------------------------
-
-STATICFILES_STORAGE = "config.settings.production.StaticRootS3Boto3Storage"
-STATIC_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static/"
+STATIC_ROOT = "/data/static"
 
 # MEDIA
 # ------------------------------------------------------------------------------
-
-
 MEDIA_ROOT = "/data/media"
-STATIC_ROOT = "/data/static"
 
 # TEMPLATES
 # ------------------------------------------------------------------------------
@@ -98,22 +93,18 @@ DEFAULT_FROM_EMAIL = env(
 SERVER_EMAIL = env("DJANGO_SERVER_EMAIL", default=DEFAULT_FROM_EMAIL)
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = env("DJANGO_EMAIL_SUBJECT_PREFIX", default="[Python Spain]")
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
+EMAIL_HOST = env("DJANGO_EMAIL_HOST")
+EMAIL_PORT = env.int("DJANGO_EMAIL_PORT", default=587)
+EMAIL_HOST_USER = env("DJANGO_EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("DJANGO_EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = env.bool("DJANGO_EMAIL_USE_TLS", default=True)
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL regex.
-ADMIN_URL = env("DJANGO_ADMIN_URL")
-
-# Anymail (Mailgun)
-# ------------------------------------------------------------------------------
-# https://anymail.readthedocs.io/en/stable/installation/#installing-anymail
-INSTALLED_APPS += ["anymail"]  # noqa F405
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-# https://anymail.readthedocs.io/en/stable/installation/#anymail-settings-reference
-ANYMAIL = {
-    "MAILGUN_API_KEY": env("MAILGUN_API_KEY"),
-    "MAILGUN_SENDER_DOMAIN": env("MAILGUN_DOMAIN"),
-}
+ADMIN_URL = env("DJANGO_ADMIN_URL", default="admin/")
 
 # Gunicorn
 # ------------------------------------------------------------------------------
@@ -122,9 +113,8 @@ INSTALLED_APPS += ["gunicorn"]  # noqa F405
 # Collectfast
 # ------------------------------------------------------------------------------
 # https://github.com/antonagestam/collectfast#installation
+COLLECTFAST_STRATEGY = "collectfast.strategies.filesystem.FileSystemStrategy"
 INSTALLED_APPS = ["collectfast"] + INSTALLED_APPS  # noqa F405
-AWS_PRELOAD_METADATA = True
-
 
 # LOGGING
 # ------------------------------------------------------------------------------
@@ -169,5 +159,6 @@ LOGGING = {
         },
     },
 }
+
 # Your stuff...
 # ------------------------------------------------------------------------------

@@ -274,6 +274,10 @@ tags
 # iPython
 .ipynb_checkpoints/
 
+# Backups & legacy
+legacy/
+*.sql.gz
+
 ### Project template
 pythonspain/media/
 

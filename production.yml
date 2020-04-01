@@ -18,7 +18,7 @@ services:
       - redis
     env_file:
       - ./.env
-  volumes:
+    volumes:
       - production_media:/data/media
       - production_static:/data/static
     command: /start
@@ -43,14 +43,13 @@ services:
     env_file:
       - ./.env
     ports:
-      - "0.0.0.0:80:80"
-      - "0.0.0.0:443:443"
+      - "0.0.0.0:5005:80"
     volumes:
       - production_media:/data/media
       - production_static:/data/static
 
   redis:
-    image: redis:3.2
+    image: redis:latest
 
   celeryworker:
     <<: *django
