@@ -4,6 +4,12 @@ Base settings to build other settings files upon.
 
 import environ
 
+# LOCALES
+# ------------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
+from django.utils.translation import gettext_lazy as _
+from options import INT
+
 ROOT_DIR = (
     environ.Path(__file__) - 3
 )  # (pythonspain/config/settings/base.py - 3 = pythonspain/)
@@ -36,10 +42,6 @@ USE_L10N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
 
-# LOCALES
-# ------------------------------------------------------------------------------
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
-from django.utils.translation import gettext_lazy as _
 
 LOCALE_PATHS = [str(ROOT_DIR.path("locale"))]
 LANGUAGES = [("en", _("English")), ("es", _("Spanish"))]
@@ -253,7 +255,14 @@ REST_FRAMEWORK = {
 # ------------------------------------------------------------------------------
 # See: https://github.com/marcosgabarda/django-simple-options
 INSTALLED_APPS += ("options",)
-SIMPLE_OPTIONS_CONFIGURATION = {}
+
+SIMPLE_OPTIONS_CONFIGURATION = {
+    "activate_welcome_emails": {
+        "value": 0,
+        "type": INT,
+        "public_name": "Activa/desactiva el envío automático del correo de bienvenida al crear un socio",
+    }
+}
 
 # DJANGO SNITCH
 # ------------------------------------------------------------------------------

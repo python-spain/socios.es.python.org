@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-29 22:56+0200\n"
+"POT-Creation-Date: 2020-04-01 22:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,23 +78,31 @@ msgstr "estado"
 msgid "items"
 msgstr "elementos"
 
-#: pythonspain/partners/admin.py:31
+#: pythonspain/partners/admin.py:10
+msgid "Welcome email sent!"
+msgstr "¡Correos de bienvenida envíados!"
+
+#: pythonspain/partners/admin.py:13
+msgid "Send welcome email"
+msgstr "Enviar correo de bienvenida"
+
+#: pythonspain/partners/admin.py:40
 msgid "has direct debit"
 msgstr "tiene domiciliación"
 
-#: pythonspain/partners/admin.py:36
+#: pythonspain/partners/admin.py:44
 msgid "Yes"
 msgstr "Sí"
 
-#: pythonspain/partners/admin.py:37
+#: pythonspain/partners/admin.py:44
 msgid "No"
 msgstr "No"
 
-#: pythonspain/partners/admin.py:73
+#: pythonspain/partners/admin.py:80
 msgid "last fee date"
 msgstr "fecha de última cuota"
 
-#: pythonspain/partners/apps.py:8 pythonspain/partners/models.py:40
+#: pythonspain/partners/apps.py:8 pythonspain/partners/models.py:41
 msgid "Partners"
 msgstr "Socios"
 
@@ -126,134 +134,159 @@ msgstr "Transferencia bancaria"
 msgid "Direct debit"
 msgstr "Domiciliación"
 
-#: pythonspain/partners/models.py:16
+#: pythonspain/partners/emails.py:11
+msgid "Approval as partner in Python Spain"
+msgstr "Aprobación como socio en Python España"
+
+#: pythonspain/partners/models.py:17
 msgid "number"
 msgstr "número"
 
-#: pythonspain/partners/models.py:17
+#: pythonspain/partners/models.py:18
 msgid "NIF"
 msgstr "NIF"
 
-#: pythonspain/partners/models.py:18 pythonspain/partners/models.py:113
+#: pythonspain/partners/models.py:19 pythonspain/partners/models.py:129
 msgid "name"
 msgstr "nombre"
 
-#: pythonspain/partners/models.py:19
+#: pythonspain/partners/models.py:20
 msgid "phone"
 msgstr "teléfono"
 
-#: pythonspain/partners/models.py:20 pythonspain/users/models.py:19
+#: pythonspain/partners/models.py:21 pythonspain/users/models.py:19
 msgid "email"
 msgstr "correo electrónico"
 
-#: pythonspain/partners/models.py:21
+#: pythonspain/partners/models.py:22
 msgid "request date"
 msgstr "fecha de solicitud"
 
-#: pythonspain/partners/models.py:22
+#: pythonspain/partners/models.py:23
 msgid "approval date"
 msgstr "fecha de aprobación"
 
-#: pythonspain/partners/models.py:24
+#: pythonspain/partners/models.py:25
 msgid "has board directors charge"
 msgstr "es miembro de la Junta Directiva"
 
-#: pythonspain/partners/models.py:27
+#: pythonspain/partners/models.py:28
 msgid "charge"
 msgstr "cargo"
 
-#: pythonspain/partners/models.py:29
+#: pythonspain/partners/models.py:30
 msgid "is founder"
 msgstr "es fundador"
 
-#: pythonspain/partners/models.py:30
+#: pythonspain/partners/models.py:31
 msgid "is active"
 msgstr "es activo"
 
-#: pythonspain/partners/models.py:31 pythonspain/partners/models.py:100
+#: pythonspain/partners/models.py:32 pythonspain/partners/models.py:116
 msgid "comment"
 msgstr "comentario"
 
-#: pythonspain/partners/models.py:33
+#: pythonspain/partners/models.py:34
 msgid "bank account"
 msgstr "cuenta bancaria"
 
-#: pythonspain/partners/models.py:39
+#: pythonspain/partners/models.py:40
 msgid "Partner"
 msgstr "Socio"
 
-#: pythonspain/partners/models.py:49
+#: pythonspain/partners/models.py:58
 msgid "The number format is not correct."
 msgstr "El formáto del número no es correcto"
 
-#: pythonspain/partners/models.py:66 pythonspain/partners/models.py:95
+#: pythonspain/partners/models.py:82 pythonspain/partners/models.py:111
 msgid "partner"
 msgstr "socio"
 
-#: pythonspain/partners/models.py:68 pythonspain/partners/models.py:98
+#: pythonspain/partners/models.py:84 pythonspain/partners/models.py:114
 msgid "date"
 msgstr "fecha"
 
-#: pythonspain/partners/models.py:70
+#: pythonspain/partners/models.py:86
 msgid "payment method"
 msgstr "método de pago"
 
-#: pythonspain/partners/models.py:76
+#: pythonspain/partners/models.py:92
 msgid "amount"
 msgstr "cantidad"
 
-#: pythonspain/partners/models.py:80
+#: pythonspain/partners/models.py:96
 msgid "Fee"
 msgstr "Cuota"
 
-#: pythonspain/partners/models.py:81
+#: pythonspain/partners/models.py:97
 msgid "Fees"
 msgstr "Cuotas"
 
-#: pythonspain/partners/models.py:103
+#: pythonspain/partners/models.py:119
 msgid "Notice"
 msgstr "Aviso"
 
-#: pythonspain/partners/models.py:104
+#: pythonspain/partners/models.py:120
 msgid "Notices"
 msgstr "Avisos"
 
-#: pythonspain/partners/models.py:116
+#: pythonspain/partners/models.py:132
 msgid "Member"
 msgstr "Miembro"
 
-#: pythonspain/partners/models.py:117
+#: pythonspain/partners/models.py:133
 msgid "Members"
 msgstr "Miembros"
 
-#: pythonspain/templates/emails/restore_password.html:6
+#: pythonspain/templates/emails/restore_password.html:11
 #: pythonspain/users/emails.py:17
 msgid "Restore your password"
 msgstr "Restaura tu contraseña"
 
-#: pythonspain/templates/emails/verification.html:6
+#: pythonspain/templates/emails/verification.html:9
 msgid "Verify email address"
 msgstr "Verifica tu correo electrónico"
 
-#: pythonspain/templates/users/restore_password.html:12
+#: pythonspain/templates/users/restore_password.html:7
+#: pythonspain/users/admin.py:52
 msgid "Restore password"
 msgstr "Restaurar contraseña"
 
-#: pythonspain/templates/users/restore_password.html:21
+#: pythonspain/templates/users/restore_password.html:16
 msgid "Update"
 msgstr "Actualizar"
 
-#: pythonspain/users/admin.py:18
+#: pythonspain/users/admin.py:14
+msgid "Restore password codes sent!"
+msgstr "¡Códigos para restaurar contraseña enviados!"
+
+#: pythonspain/users/admin.py:17
+msgid "Send restore password code"
+msgstr "Enviar código para restaurar contraseña"
+
+#: pythonspain/users/admin.py:24
+msgid "Email verification sent!"
+msgstr "¡Verificación de correo electrónico de enviada!"
+
+#: pythonspain/users/admin.py:27
+msgid "Send email verification"
+msgstr "Enviar verificación de correo electrónico"
+
+#: pythonspain/users/admin.py:37
 msgid "Personal info"
 msgstr "Información personal"
 
-#: pythonspain/users/admin.py:20
+#: pythonspain/users/admin.py:39
 msgid "Permissions"
 msgstr "Permisos"
 
-#: pythonspain/users/admin.py:31
+#: pythonspain/users/admin.py:50
 msgid "Important dates"
 msgstr "Fechas importantes"
+
+#: pythonspain/users/admin.py:56
+msgid "Email verification"
+msgstr "Correo electrónico de verificación"
 
 #: pythonspain/users/apps.py:8
 msgid "Users"
@@ -267,23 +300,31 @@ msgstr "Verifica tu correo electrónico"
 msgid "This email has already been taken."
 msgstr "Este correo electrónico está en uso"
 
-#: pythonspain/users/forms.py:39
-msgid "New Password"
-msgstr "Nueva contraseña"
+#: pythonspain/users/forms.py:38
+msgid "password"
+msgstr "contraseña"
 
-#: pythonspain/users/forms.py:41
+#: pythonspain/users/forms.py:40
+msgid "New Password"
+msgstr "Nueva Contraseña"
+
+#: pythonspain/users/forms.py:42
 msgid "The password is required"
 msgstr "La contraseña es requerida"
 
 #: pythonspain/users/forms.py:45
+msgid "repeat password"
+msgstr "repite contraseña"
+
+#: pythonspain/users/forms.py:47
 msgid "Repeat Password"
 msgstr "Repite Contraseña"
 
-#: pythonspain/users/forms.py:57
+#: pythonspain/users/forms.py:59
 msgid "Restore code doesn't exists"
 msgstr "El código de restauración no existe"
 
-#: pythonspain/users/forms.py:64
+#: pythonspain/users/forms.py:66
 msgid "Passwords are not the same"
 msgstr "Las contraseñas no son las mismas"
 
@@ -346,11 +387,3 @@ msgstr "¡Contraseña actualizada!"
 #: pythonspain/users/views.py:37
 msgid "User verified!"
 msgstr "¡Usuario verificado!"
-
-#, python-brace-format
-#~ msgid "Import #{self.pk}"
-#~ msgstr "Importación #{self.pk}"
-
-#, python-brace-format
-#~ msgid "Export #{self.pk}"
-#~ msgstr "Exportación #{self.pk}"

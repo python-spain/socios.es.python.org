@@ -96,6 +96,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         email = RestorePasswordEmail(to=self.email, context={"user": self})
         email.send()
 
+    def reset_verification(self, commit=False):
+        """Resets the email verification."""
+        self.is_email_verified = False
+        self.verification_code = self.generate_random_code()
+        if commit:
+            self.save()
+
     def send_verification(self):
         """Send the validation email, to validate the user's email."""
         assert self.pk is not None

@@ -1,13 +1,15 @@
-import re
 import datetime
+import re
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from model_utils.models import TimeStampedModel
+from options.models import Option
 
 from pythonspain.partners.constants import CHARGES, PAYMENT_METHODS, WIRE_TRANSFER
+from pythonspain.partners.emails import PartnerWelcomeEmail
 from pythonspain.partners.managers import PartnerQuerySet
-from django.core.exceptions import ValidationError
 
 
 class Partner(TimeStampedModel):
@@ -43,6 +45,14 @@ class Partner(TimeStampedModel):
     def __str__(self):
         return self.name
 
+    def get_short_name(self):
+        """Gets the name of the partner."""
+        return "".join(self.name.split(" ")[:1])
+
+    def get_number(self):
+        """Gets the partner number without the prefix and as an int."""
+        return int(self.number.split("PYES-")[1])
+
     def clean(self):
         # Check number format
         if not re.match(r"PYES-[0-9]{4}", self.number):
@@ -51,9 +61,20 @@ class Partner(TimeStampedModel):
         if self.bank_account:
             self.bank_account = self.bank_account.replace(" ", "")
 
+    def send_welcome(self):
+        """Sends the welcome email."""
+        email = PartnerWelcomeEmail(to=self.email, context={"partner": self})
+        email.send()
+
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
+        # Automatic welcome emails
+        activate_welcome_emails = bool(
+            Option.objects.get_value("activate_welcome_emails", default=0)
+        )
+        if self._state.adding and activate_welcome_emails:
+            self.send_welcome()
 
 
 class Fee(TimeStampedModel):

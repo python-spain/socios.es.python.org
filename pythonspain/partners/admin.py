@@ -4,6 +4,15 @@ from django.utils.translation import gettext_lazy as _
 from pythonspain.partners.models import Fee, Member, Notice, Partner
 
 
+def send_welcome_action(modeladmin, request, queryset):
+    for partner in queryset:
+        partner.send_welcome()
+    modeladmin.message_user(request, _("Welcome email sent!"))
+
+
+send_welcome_action.short_description = _("Send welcome email")
+
+
 @admin.register(Fee)
 class FeeAdmin(admin.ModelAdmin):
     list_display = ["id", "partner", "payment_method", "amount", "date"]
@@ -59,6 +68,7 @@ class PartnerAdmin(admin.ModelAdmin):
     ]
     search_fields = ["number", "name", "nif", "email"]
     inlines = [FeeInline, NoticeInline]
+    actions = [send_welcome_action]
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)

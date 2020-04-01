@@ -35,15 +35,17 @@ class RestorePasswordForm(forms.Form):
     """Form to restore password."""
 
     password = forms.fields.CharField(
+        label=_("password"),
         widget=forms.PasswordInput(
             attrs={"class": "input", "placeholder": _("New Password")}
         ),
         error_messages={"required": _("The password is required")},
     )
     repeat_password = forms.CharField(
+        label=_("repeat password"),
         widget=forms.PasswordInput(
             attrs={"class": "input", "placeholder": _("Repeat Password")}
-        )
+        ),
     )
     restore_password_code = forms.fields.CharField(
         widget=forms.HiddenInput(), required=True
