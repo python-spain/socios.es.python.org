@@ -132,6 +132,7 @@ class Member(TimeStampedModel):
     """A non-paid member."""
 
     name = models.CharField(_("name"), max_length=100)
+    email = models.EmailField(_("email"), max_length=75, null=True)
 
     class Meta:
         verbose_name = _("Member")
