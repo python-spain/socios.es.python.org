@@ -1,7 +1,14 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from pythonspain.partners.models import Fee, Member, Notice, Partner
+from pythonspain.partners.models import (
+    Fee,
+    Member,
+    Notice,
+    Partner,
+    PartnerExport,
+    MemberExport,
+)
 
 
 def send_welcome_action(modeladmin, request, queryset):
@@ -11,6 +18,16 @@ def send_welcome_action(modeladmin, request, queryset):
 
 
 send_welcome_action.short_description = _("Send welcome email")
+
+
+def export_action(modeladmin, request, queryset):
+    """Admin action to launch the export process."""
+    for import_model in queryset:
+        import_model.export_data(async_process=True)
+    modeladmin.message_user(request, _("Launched export tasks..."))
+
+
+export_action.short_description = _("Launch exports")
 
 
 @admin.register(Fee)
@@ -85,3 +102,15 @@ class PartnerAdmin(admin.ModelAdmin):
 class MemberAdmin(admin.ModelAdmin):
     list_display = ["id", "name", "created"]
     search_fields = ["name"]
+
+
+@admin.register(PartnerExport)
+class PartnerExportAdmin(admin.ModelAdmin):
+    list_display = ["id", "data", "status", "items", "created"]
+    actions = [export_action]
+
+
+@admin.register(MemberExport)
+class MemberExportAdmin(admin.ModelAdmin):
+    list_display = ["id", "data", "status", "items", "created"]
+    actions = [export_action]

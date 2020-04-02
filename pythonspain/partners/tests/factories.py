@@ -1,6 +1,12 @@
 import factory
 
-from pythonspain.partners.models import Partner, Fee
+from pythonspain.partners.models import (
+    Fee,
+    Member,
+    MemberExport,
+    Partner,
+    PartnerExport,
+)
 
 
 class PartnerFactory(factory.DjangoModelFactory):
@@ -12,8 +18,26 @@ class PartnerFactory(factory.DjangoModelFactory):
         model = Partner
 
 
+class MemberFactory(factory.DjangoModelFactory):
+    name = factory.Faker("first_name")
+    email = factory.Faker("email")
+
+    class Meta:
+        model = Member
+
+
 class FeeFactory(factory.DjangoModelFactory):
     partner = factory.SubFactory(PartnerFactory)
 
     class Meta:
         model = Fee
+
+
+class PartnerExportFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = PartnerExport
+
+
+class MemberExportFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = MemberExport

@@ -7,9 +7,12 @@ from django.utils.translation import gettext_lazy as _
 from model_utils.models import TimeStampedModel
 from options.models import Option
 
+from pythonspain.core.models import BaseExport
 from pythonspain.partners.constants import CHARGES, PAYMENT_METHODS, WIRE_TRANSFER
 from pythonspain.partners.emails import PartnerWelcomeEmail
+from pythonspain.partners.helpers import export_members, export_partners
 from pythonspain.partners.managers import PartnerQuerySet
+from pythonspain.partners.tasks import member_export_task, partner_export_task
 
 
 class Partner(TimeStampedModel):
@@ -141,3 +144,45 @@ class Member(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+
+class PartnerExport(BaseExport):
+    FILE_NAME = "partners"
+
+    class Meta:
+        verbose_name = _("Partners export")
+        verbose_name_plural = _("Partners exports")
+        ordering = ["-created"]
+
+    def get_queryset(self):
+        """Gets the QuerySet to export."""
+        return Partner.objects.all().annotate_last_fee_date()
+
+    def exporter(self):
+        """Gets the export helper function that does the export."""
+        return export_partners
+
+    def exporter_task(self):
+        """Gets the async task that does the exporter."""
+        return partner_export_task
+
+
+class MemberExport(BaseExport):
+    FILE_NAME = "members"
+
+    class Meta:
+        verbose_name = _("Members export")
+        verbose_name_plural = _("Members exports")
+        ordering = ["-created"]
+
+    def get_queryset(self):
+        """Gets the QuerySet to export."""
+        return Member.objects.all()
+
+    def exporter(self):
+        """Gets the export helper function that does the export."""
+        return export_members
+
+    def exporter_task(self):
+        """Gets the async task that does the exporter."""
+        return member_export_task

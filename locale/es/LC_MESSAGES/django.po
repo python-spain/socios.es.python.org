@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-01 22:46+0200\n"
+"POT-Creation-Date: 2020-04-02 19:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/settings/base.py:45
+#: config/settings/base.py:47
 msgid "English"
 msgstr "Inglés"
 
-#: config/settings/base.py:45
+#: config/settings/base.py:47
 msgid "Spanish"
 msgstr "Español"
 
@@ -30,11 +30,11 @@ msgstr "Español"
 msgid "Python Spain Admin"
 msgstr "Panel de administración de Python España"
 
-#: pythonspain/banks/admin.py:13
+#: pythonspain/banks/admin.py:11
 msgid "Launched import consignments tasks..."
 msgstr "Lanzada tarea para importar remesas"
 
-#: pythonspain/banks/admin.py:16
+#: pythonspain/banks/admin.py:14
 msgid "Import consignments"
 msgstr "Importar remesas"
 
@@ -50,59 +50,67 @@ msgstr "Importación de remesas"
 msgid "Consignment imports"
 msgstr "Importaciones de remesas"
 
-#: pythonspain/core/models.py:18
+#: pythonspain/core/models.py:19 pythonspain/core/models.py:86
 msgid "Idle"
 msgstr "En espera"
 
-#: pythonspain/core/models.py:19
+#: pythonspain/core/models.py:20 pythonspain/core/models.py:87
 msgid "Running"
 msgstr "Ejecutando"
 
-#: pythonspain/core/models.py:20
+#: pythonspain/core/models.py:21 pythonspain/core/models.py:88
 msgid "Finished"
 msgstr "Finalizado"
 
-#: pythonspain/core/models.py:21
+#: pythonspain/core/models.py:22 pythonspain/core/models.py:89
 msgid "Error"
 msgstr "Error"
 
-#: pythonspain/core/models.py:25
+#: pythonspain/core/models.py:26 pythonspain/core/models.py:96
 msgid "data"
 msgstr "datos"
 
-#: pythonspain/core/models.py:29
+#: pythonspain/core/models.py:30 pythonspain/core/models.py:100
 msgid "status"
 msgstr "estado"
 
-#: pythonspain/core/models.py:31
+#: pythonspain/core/models.py:32 pythonspain/core/models.py:102
 msgid "items"
 msgstr "elementos"
 
-#: pythonspain/partners/admin.py:10
+#: pythonspain/partners/admin.py:17
 msgid "Welcome email sent!"
 msgstr "¡Correos de bienvenida envíados!"
 
-#: pythonspain/partners/admin.py:13
+#: pythonspain/partners/admin.py:20
 msgid "Send welcome email"
 msgstr "Enviar correo de bienvenida"
 
-#: pythonspain/partners/admin.py:40
+#: pythonspain/partners/admin.py:27
+msgid "Launched export tasks..."
+msgstr "Lanzada tarea para exportar..."
+
+#: pythonspain/partners/admin.py:30
+msgid "Launch exports"
+msgstr "Lanzar exportaciones"
+
+#: pythonspain/partners/admin.py:57
 msgid "has direct debit"
 msgstr "tiene domiciliación"
 
-#: pythonspain/partners/admin.py:44
+#: pythonspain/partners/admin.py:61
 msgid "Yes"
 msgstr "Sí"
 
-#: pythonspain/partners/admin.py:44
+#: pythonspain/partners/admin.py:61
 msgid "No"
 msgstr "No"
 
-#: pythonspain/partners/admin.py:80
+#: pythonspain/partners/admin.py:97
 msgid "last fee date"
 msgstr "fecha de última cuota"
 
-#: pythonspain/partners/apps.py:8 pythonspain/partners/models.py:41
+#: pythonspain/partners/apps.py:8 pythonspain/partners/models.py:45
 msgid "Partners"
 msgstr "Socios"
 
@@ -138,105 +146,122 @@ msgstr "Domiciliación"
 msgid "Approval as partner in Python Spain"
 msgstr "Aprobación como socio en Python España"
 
-#: pythonspain/partners/models.py:17
+#: pythonspain/partners/models.py:21
 msgid "number"
 msgstr "número"
 
-#: pythonspain/partners/models.py:18
+#: pythonspain/partners/models.py:22
 msgid "NIF"
 msgstr "NIF"
 
-#: pythonspain/partners/models.py:19 pythonspain/partners/models.py:129
+#: pythonspain/partners/models.py:23 pythonspain/partners/models.py:137
 msgid "name"
 msgstr "nombre"
 
-#: pythonspain/partners/models.py:20
+#: pythonspain/partners/models.py:24
 msgid "phone"
 msgstr "teléfono"
 
-#: pythonspain/partners/models.py:21 pythonspain/users/models.py:19
+#: pythonspain/partners/models.py:25 pythonspain/partners/models.py:138
+#: pythonspain/users/models.py:19
 msgid "email"
 msgstr "correo electrónico"
 
-#: pythonspain/partners/models.py:22
+#: pythonspain/partners/models.py:26
 msgid "request date"
 msgstr "fecha de solicitud"
 
-#: pythonspain/partners/models.py:23
+#: pythonspain/partners/models.py:27
 msgid "approval date"
 msgstr "fecha de aprobación"
 
-#: pythonspain/partners/models.py:25
+#: pythonspain/partners/models.py:29
 msgid "has board directors charge"
 msgstr "es miembro de la Junta Directiva"
 
-#: pythonspain/partners/models.py:28
+#: pythonspain/partners/models.py:32
 msgid "charge"
 msgstr "cargo"
 
-#: pythonspain/partners/models.py:30
+#: pythonspain/partners/models.py:34
 msgid "is founder"
 msgstr "es fundador"
 
-#: pythonspain/partners/models.py:31
+#: pythonspain/partners/models.py:35
 msgid "is active"
 msgstr "es activo"
 
-#: pythonspain/partners/models.py:32 pythonspain/partners/models.py:116
+#: pythonspain/partners/models.py:36 pythonspain/partners/models.py:124
 msgid "comment"
 msgstr "comentario"
 
-#: pythonspain/partners/models.py:34
+#: pythonspain/partners/models.py:38
 msgid "bank account"
 msgstr "cuenta bancaria"
 
-#: pythonspain/partners/models.py:40
+#: pythonspain/partners/models.py:44
 msgid "Partner"
 msgstr "Socio"
 
-#: pythonspain/partners/models.py:58
+#: pythonspain/partners/models.py:62
 msgid "The number format is not correct."
 msgstr "El formáto del número no es correcto"
 
-#: pythonspain/partners/models.py:82 pythonspain/partners/models.py:111
+#: pythonspain/partners/models.py:90 pythonspain/partners/models.py:119
 msgid "partner"
 msgstr "socio"
 
-#: pythonspain/partners/models.py:84 pythonspain/partners/models.py:114
+#: pythonspain/partners/models.py:92 pythonspain/partners/models.py:122
 msgid "date"
 msgstr "fecha"
 
-#: pythonspain/partners/models.py:86
+#: pythonspain/partners/models.py:94
 msgid "payment method"
 msgstr "método de pago"
 
-#: pythonspain/partners/models.py:92
+#: pythonspain/partners/models.py:100
 msgid "amount"
 msgstr "cantidad"
 
-#: pythonspain/partners/models.py:96
+#: pythonspain/partners/models.py:104
 msgid "Fee"
 msgstr "Cuota"
 
-#: pythonspain/partners/models.py:97
+#: pythonspain/partners/models.py:105
 msgid "Fees"
 msgstr "Cuotas"
 
-#: pythonspain/partners/models.py:119
+#: pythonspain/partners/models.py:127
 msgid "Notice"
 msgstr "Aviso"
 
-#: pythonspain/partners/models.py:120
+#: pythonspain/partners/models.py:128
 msgid "Notices"
 msgstr "Avisos"
 
-#: pythonspain/partners/models.py:132
+#: pythonspain/partners/models.py:141
 msgid "Member"
 msgstr "Miembro"
 
-#: pythonspain/partners/models.py:133
+#: pythonspain/partners/models.py:142
 msgid "Members"
 msgstr "Miembros"
+
+#: pythonspain/partners/models.py:151
+msgid "Partners export"
+msgstr "Exportación de socios"
+
+#: pythonspain/partners/models.py:152
+msgid "Partners exports"
+msgstr "Exportaciones de socios"
+
+#: pythonspain/partners/models.py:170
+msgid "Members export"
+msgstr "Exportación de miembros"
+
+#: pythonspain/partners/models.py:171
+msgid "Members exports"
+msgstr "Exportaciones de miembros"
 
 #: pythonspain/templates/emails/restore_password.html:11
 #: pythonspain/users/emails.py:17

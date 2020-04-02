@@ -5,9 +5,7 @@ from pythonspain.banks.models import ConsignmentImport
 
 
 def import_action(modeladmin, request, queryset):
-    """Admin action to launch the import process of the coupons from ConsignmentImport
-    model.
-    """
+    """Admin action to launch the import process."""
     for import_model in queryset:
         import_model.import_data(async_process=True)
     modeladmin.message_user(request, _("Launched import consignments tasks..."))
