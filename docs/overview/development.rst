@@ -48,13 +48,13 @@ entorno local, por ejemplo:
 El proyecto está configurado con ``poetry``, así que podemos crear el entorno virutal 
 simplemente con:
 
-.. code-block::
+.. code-block:: console
 
     $ poetry install
 
 Por último lanzamos los servicios locales con docker-compose:
 
-.. code-block::
+.. code-block:: console
 
     $ docker-compose -f local.yml up --build
 
@@ -63,7 +63,7 @@ Tests
 
 Para ejecutar los tests:
 
-.. code-block::
+.. code-block:: console
 
     $ poetry run pytest .
 
@@ -73,6 +73,6 @@ Servidor local
 
 Para ejecutar el servidor local:
 
-.. code-block::
+.. code-block:: console
 
     $ poetry run ./manage.py runserver

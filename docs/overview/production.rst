@@ -42,9 +42,9 @@ siguente, cambiando los valores entre ``{}``.
 2. Ejecutamos los servicios con docker-compose
 ----------------------------------------------
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ docker-compose -f production ud -d --build
+    $ docker-compose -f production.yml up -d --build
 
 Por defecto, esto lanzará un servidor **nginx** en el puerto **5005**, que hará de proxy sobre 
 la aplicación de Django.
