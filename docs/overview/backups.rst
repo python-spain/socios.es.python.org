@@ -1,7 +1,7 @@
 Backups de base de datos
 ========================
 
-Existen una serie de comandos para la gestión de los backups de la base de 
+Existen una serie de comandos para la gestión de los backups de la base de
 datos. Estos comando crean, listan y restauran volcados de la base de datos,
 almacenados en un volumen específico.
 
@@ -31,4 +31,4 @@ Restaurar un backup
 
 .. code-block:: console
 
-    $ docker-compose -f production.yml run --rm restore backup_2020_04_02T17_35_20.sql.gz
+    $ docker-compose -f production.yml run --rm postgres restore backup_2020_04_02T17_35_20.sql.gz
