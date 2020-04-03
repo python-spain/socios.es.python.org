@@ -1,25 +1,32 @@
 {% extends "emails/base.html" %}
 {% load i18n %}
 {% block content %}
-<p class="lead">Hola {{ partner.get_short_name }},</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  Hola {{ partner.get_short_name }},</p>
 
-<p>
-    ¡Muchísimas gracias por animarte a asociarte a Python España! Con tu esfuerzo unido
-    al del resto de los socios y socias vamos a conseguir que la comunidad crezca más
-    fuerte y más diversa.
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  ¡Muchísimas gracias por animarte a asociarte a Python España! Con tu esfuerzo unido
+  al del resto de los socios y socias vamos a conseguir que la comunidad crezca más
+  fuerte y más diversa.
 </p>
 
-<p>
-    En la pasada reunión de la junta se validó tu inscripción. Tu número de socio es
-    el <strong>{{ partner.get_number }}</strong>.
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  En la pasada reunión de la junta se validó tu inscripción. Tu número de socio es
+  el <strong>{{ partner.get_number }}</strong>.
 </p>
 
-<p>
-    Recuerda que puedes consultar todas las actas en el siguiente <a
-        href="https://github.com/python-spain/documentacion">repositorio</a>. Y que existen grupos
-    de trabajo que nos permitirán hacer muchas más cosas. Si te quieres unir a algun grupo de trabajo eres más que
-    bienvenido a través del <a href="https://comunidad.es.python.org/">Discourse</a> de la asociación.
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  Recuerda que puedes consultar todas las actas en el siguiente <a
+    href="https://github.com/python-spain/documentacion">repositorio</a>. Y que existen grupos
+  de trabajo que nos permitirán hacer muchas más cosas. Si te quieres unir a algun grupo de trabajo eres más que
+  bienvenido a través del <a href="https://comunidad.es.python.org/">Discourse</a> de la asociación.
 </p>
 
-<p>En cualquier caso, gracias por colaborar con la comunidad.</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  En cualquier caso, gracias por colaborar con la comunidad.</p>
 {% endblock content %}

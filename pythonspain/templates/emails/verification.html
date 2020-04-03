@@ -1,13 +1,21 @@
 {% extends "emails/base.html" %}
 {% load i18n %}
 {% block content %}
-<p class="lead">¡Hola {{ user.get_short_name }}!</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  ¡Hola {{ user.get_short_name }}!</p>
 
-<p>Haz click en el siguiente enlace para verificar tu cuenta de correo electrónico:</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  Haz click en el siguiente enlace para verificar tu cuenta de correo electrónico:</p>
 
-<p><a href="https://{{ site.domain }}{% url "users:verified" verification_code=user.verification_code %}">
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  <a href="https://{{ site.domain }}{% url "users:verified" verification_code=user.verification_code %}">
     {% trans "Verify email address" %}
   </a></p>
 
-<p>¡Un saludo!</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  ¡Un saludo!</p>
 {% endblock content %}
