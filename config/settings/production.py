@@ -145,6 +145,7 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
+        "null": {"class": "logging.NullHandler"},
     },
     "loggers": {
         "django.request": {
@@ -152,11 +153,7 @@ LOGGING = {
             "level": "ERROR",
             "propagate": True,
         },
-        "django.security.DisallowedHost": {
-            "level": "ERROR",
-            "handlers": ["console"],
-            "propagate": True,
-        },
+        "django.security.DisallowedHost": {"handlers": ["null"], "propagate": False},
     },
 }
 
