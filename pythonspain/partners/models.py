@@ -18,7 +18,7 @@ from pythonspain.partners.tasks import member_export_task, partner_export_task
 class Partner(TimeStampedModel):
     """A partner is a person who is paying the partner fee."""
 
-    number = models.CharField(_("number"), max_length=10, unique=True, db_index=True)
+    number = models.CharField(_("number"), max_length=10, unique=True, db_index=True, blank=True)
     nif = models.CharField(_("NIF"), max_length=20, null=True, blank=True)
     name = models.CharField(_("name"), max_length=100)
     phone = models.CharField(_("phone"), max_length=20, null=True, blank=True)
@@ -57,9 +57,19 @@ class Partner(TimeStampedModel):
         return int(self.number.split("PYES-")[1])
 
     def clean(self):
+        # Set number if is empty
+        if not self.number:
+            n = 1
+            last = self.__class__.objects.order_by("number").last()
+            if last:
+                n += last.get_number()
+
+            self.number = f"PYES-{n:04}"
+
         # Check number format
         if not re.match(r"PYES-[0-9]{4}", self.number):
             raise ValidationError({"number": _("The number format is not correct.")})
+
         # Remove spaces from back account
         if self.bank_account:
             self.bank_account = self.bank_account.replace(" ", "")
