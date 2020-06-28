@@ -554,6 +554,14 @@ django = ">=1.11"
 
 [[package]]
 category = "main"
+description = "Camel case JSON support for Django REST framework."
+name = "djangorestframework-camel-case"
+optional = false
+python-versions = ">=3.5"
+version = "1.2.0"
+
+[[package]]
+category = "main"
 description = "Docutils -- Python Documentation Utilities"
 name = "docutils"
 optional = false
@@ -1590,6 +1598,18 @@ security = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)"]
 socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7)", "win-inet-pton"]
 
 [[package]]
+category = "main"
+description = "Complex permissions flow for django-rest-framework"
+name = "rest-condition"
+optional = false
+python-versions = "*"
+version = "1.0.3"
+
+[package.dependencies]
+django = ">=1.3"
+djangorestframework = "*"
+
+[[package]]
 category = "dev"
 description = "Checks syntax of reStructuredText and code blocks nested within it"
 name = "rstcheck"
@@ -1965,7 +1985,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "4ed4aafa47287f7696d10b9173a8a966b0b6eed44b071c3361047dd49e66261b"
+content-hash = "5652599504a17508590b610a71a470a81eaa6017d006e4a8f6576dd446ef54c7"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -2231,6 +2251,9 @@ django-test-plus = [
 djangorestframework = [
     {file = "djangorestframework-3.11.0-py3-none-any.whl", hash = "sha256:05809fc66e1c997fd9a32ea5730d9f4ba28b109b9da71fccfa5ff241201fd0a4"},
     {file = "djangorestframework-3.11.0.tar.gz", hash = "sha256:e782087823c47a26826ee5b6fa0c542968219263fb3976ec3c31edab23a4001f"},
+]
+djangorestframework-camel-case = [
+    {file = "djangorestframework-camel-case-1.2.0.tar.gz", hash = "sha256:9714d43fba5bb654057c29501649684d3d9f11a92319ae417fd4d65e80d1159d"},
 ]
 docutils = [
     {file = "docutils-0.16-py2.py3-none-any.whl", hash = "sha256:0c5b78adfbf7762415433f5515cd5c9e762339e23369dbe8000d84a4bf4ab3af"},
@@ -2733,8 +2756,12 @@ regex = [
     {file = "regex-2020.2.20.tar.gz", hash = "sha256:9e9624440d754733eddbcd4614378c18713d2d9d0dc647cf9c72f64e39671be5"},
 ]
 requests = [
+    {file = "requests-2.23.0-py2.7.egg", hash = "sha256:5d2d0ffbb515f39417009a46c14256291061ac01ba8f875b90cad137de83beb4"},
     {file = "requests-2.23.0-py2.py3-none-any.whl", hash = "sha256:43999036bfa82904b6af1d99e4882b560e5e2c68e5c4b0aa03b655f3d7d73fee"},
     {file = "requests-2.23.0.tar.gz", hash = "sha256:b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"},
+]
+rest-condition = [
+    {file = "rest_condition-1.0.3.tar.gz", hash = "sha256:7f47ed11a6519260b3f6248a2b6d6bf127ea7d9e04155fcf1e546bb561295af8"},
 ]
 rstcheck = [
     {file = "rstcheck-3.3.1.tar.gz", hash = "sha256:92c4f79256a54270e0402ba16a2f92d0b3c15c8f4410cb9c57127067c215741f"},
