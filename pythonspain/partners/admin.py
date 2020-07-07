@@ -68,6 +68,7 @@ class DirectDebitListFilter(admin.SimpleListFilter):
 
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
+    readonly_fields = ('number',)
     list_display = [
         "number",
         "name",
