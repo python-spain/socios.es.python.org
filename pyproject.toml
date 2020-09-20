@@ -31,6 +31,7 @@ xlrd = "^1.2.0"
 collectfast = "^2.1.0"
 djangorestframework-camel-case = "^1.2.0"
 rest_condition = "^1.0.3"
+django-cors-headers = "^3.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "<5.4.0"

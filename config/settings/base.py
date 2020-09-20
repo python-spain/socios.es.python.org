@@ -72,7 +72,9 @@ DJANGO_APPS = [
     "django.contrib.humanize",
     "django.contrib.admin",
 ]
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "corsheaders",
+]
 LOCAL_APPS = [
     "pythonspain.users.apps.UsersAppConfig",
     "pythonspain.partners.apps.PartnersAppConfig",
@@ -125,6 +127,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -186,6 +189,16 @@ TEMPLATES = [
     }
 ]
 
+# CORS
+# ------------------------------------------------------------------------------
+# https://github.com/adamchainz/django-cors-headers
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = [
+    "https://socios.es.python.org",
+    "http://localhost:8080",
+]
+
 # FIXTURES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#fixture-dirs
@@ -237,7 +250,7 @@ ENABLE_CUSTOM_EMAIL_SENDING = True
 # DJANGO REST FRAMEWORK
 # ------------------------------------------------------------------------------
 # See: http://www.django-rest-framework.org/
-INSTALLED_APPS += ("rest_framework", "rest_framework.authtoken", "django_filters")
+INSTALLED_APPS += ("rest_framework", "rest_framework.authtoken", "django_filters",)
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
