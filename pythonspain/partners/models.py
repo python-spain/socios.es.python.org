@@ -89,7 +89,7 @@ class Partner(TimeStampedModel):
         last_fee = self.fees.order_by("-date").first()
         email = ReminderFee(
             to=self.email,
-            from_email=treasury_email,
+            from_email=f"Tesorería Python España <{treasury_email}>",
             reply_to=treasury_email,
             context={"partner": self, "last_fee": last_fee},
         )
