@@ -4,11 +4,20 @@ from django.utils.translation import gettext_lazy as _
 from pythonspain.partners.models import (
     Fee,
     Member,
+    MemberExport,
     Notice,
     Partner,
     PartnerExport,
-    MemberExport,
 )
+
+
+def send_reminder_fee_action(modeladmin, request, queryset):
+    for partner in queryset.delayed_fee():
+        partner.send_reminder_fee()
+    modeladmin.message_user(request, _("Reminder fee email sent!"))
+
+
+send_reminder_fee_action.short_description = _("Send reinder fee email")
 
 
 def send_welcome_action(modeladmin, request, queryset):
@@ -66,9 +75,33 @@ class DirectDebitListFilter(admin.SimpleListFilter):
         return queryset
 
 
+class LastFeeYearListFilter(admin.SimpleListFilter):
+    title = _("last fee year")
+    parameter_name = "last_fee_year"
+
+    def lookups(self, request, model_admin):
+        years = set(
+            [
+                date.year
+                for date in model_admin.model.objects.active()
+                .annotate_last_fee_date()
+                .values_list("last_fee_date", flat=True)
+                if date
+            ]
+        )
+        return [(year, f"{year}") for year in sorted(years)]
+
+    def queryset(self, request, queryset):
+        if self.value() is not None:
+            return queryset.annotate_last_fee_date().filter(
+                last_fee_date__year=self.value()
+            )
+        return queryset
+
+
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
-    readonly_fields = ('number',)
+    readonly_fields = ("number",)
     list_display = [
         "number",
         "name",
@@ -83,10 +116,11 @@ class PartnerAdmin(admin.ModelAdmin):
         "is_founder",
         "has_board_directors_charge",
         DirectDebitListFilter,
+        LastFeeYearListFilter,
     ]
     search_fields = ["number", "name", "nif", "email"]
     inlines = [FeeInline, NoticeInline]
-    actions = [send_welcome_action]
+    actions = [send_welcome_action, send_reminder_fee_action]
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)

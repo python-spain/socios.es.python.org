@@ -8,7 +8,7 @@ import environ
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 from django.utils.translation import gettext_lazy as _
-from options import INT
+from options import INT, STR
 
 ROOT_DIR = (
     environ.Path(__file__) - 3
@@ -250,7 +250,11 @@ ENABLE_CUSTOM_EMAIL_SENDING = True
 # DJANGO REST FRAMEWORK
 # ------------------------------------------------------------------------------
 # See: http://www.django-rest-framework.org/
-INSTALLED_APPS += ("rest_framework", "rest_framework.authtoken", "django_filters",)
+INSTALLED_APPS += (
+    "rest_framework",
+    "rest_framework.authtoken",
+    "django_filters",
+)
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -286,7 +290,12 @@ SIMPLE_OPTIONS_CONFIGURATION = {
         "value": 0,
         "type": INT,
         "public_name": "Activa/desactiva el envío automático del correo de bienvenida al crear un socio",
-    }
+    },
+    "treasury_email": {
+        "value": "tesoreria@es.python.org",
+        "type": STR,
+        "public_name": "Treasury email",
+    },
 }
 
 # DJANGO SNITCH

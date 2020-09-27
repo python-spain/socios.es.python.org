@@ -9,3 +9,10 @@ class PartnerWelcomeEmail(TemplateEmailMessage):
 
     default_template_name = "emails/welcome.html"
     default_subject = _("Approval as partner in Python Spain")
+
+
+class ReminderFee(TemplateEmailMessage):
+    """Email for partners with reminder fee."""
+
+    default_template_name = "emails/reminder.html"
+    default_subject = _("Fee reminder")

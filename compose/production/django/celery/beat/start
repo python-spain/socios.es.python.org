@@ -4,4 +4,5 @@ set -o errexit
 set -o nounset
 
 
+python /app/manage.py compilemessages
 celery -A pythonspain.taskapp beat -l INFO

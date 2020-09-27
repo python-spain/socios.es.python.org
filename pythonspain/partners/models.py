@@ -9,7 +9,7 @@ from options.models import Option
 
 from pythonspain.core.models import BaseExport
 from pythonspain.partners.constants import CHARGES, PAYMENT_METHODS, WIRE_TRANSFER
-from pythonspain.partners.emails import PartnerWelcomeEmail
+from pythonspain.partners.emails import ReminderFee, PartnerWelcomeEmail
 from pythonspain.partners.helpers import export_members, export_partners
 from pythonspain.partners.managers import PartnerQuerySet
 from pythonspain.partners.tasks import member_export_task, partner_export_task
@@ -18,7 +18,9 @@ from pythonspain.partners.tasks import member_export_task, partner_export_task
 class Partner(TimeStampedModel):
     """A partner is a person who is paying the partner fee."""
 
-    number = models.CharField(_("number"), max_length=10, unique=True, db_index=True, blank=True)
+    number = models.CharField(
+        _("number"), max_length=10, unique=True, db_index=True, blank=True
+    )
     nif = models.CharField(_("NIF"), max_length=20, null=True, blank=True)
     name = models.CharField(_("name"), max_length=100)
     phone = models.CharField(_("phone"), max_length=20, null=True, blank=True)
@@ -77,6 +79,20 @@ class Partner(TimeStampedModel):
     def send_welcome(self):
         """Sends the welcome email."""
         email = PartnerWelcomeEmail(to=self.email, context={"partner": self})
+        email.send()
+
+    def send_reminder_fee(self):
+        """Sends the reminder fee email."""
+        treasury_email = Option.objects.get_value(
+            "treasury_email", default="tesoreria@es.python.org"
+        )
+        last_fee = self.fees.order_by("-date").first()
+        email = ReminderFee(
+            to=self.email,
+            from_email=treasury_email,
+            reply_to=treasury_email,
+            context={"partner": self, "last_fee": last_fee},
+        )
         email.send()
 
     def save(self, *args, **kwargs):

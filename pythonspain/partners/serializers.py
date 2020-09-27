@@ -14,5 +14,5 @@ class PartnerSerializer(serializers.ModelSerializer):
             "has_board_directors_charge",
             "charge",
             "is_founder",
-            "is_active"
+            "is_active",
         ]

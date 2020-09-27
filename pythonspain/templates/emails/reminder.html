@@ -1,0 +1,37 @@
+{% extends "emails/base.html" %}
+{% load i18n %}
+{% block content %}
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  ¡Hola {{ partner.get_short_name }}!</p>
+
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  Te mandamos este recordatorio porque hemos visto que la última cuota de socio que pagaste fue en
+  {{ last_fee.date.year }}.
+  Si quieres ponerte al día con las cuotas sólo tendrías que hacer una transferencia de 30€ a la cuenta de la
+  asociación:
+</p>
+
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: bold; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  ES18 1491 0001 2230 0008 5378
+</p>
+
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  Y luego enviar un correo a <a href="mailto:tesoreria@es.python.org">tesorería</a> con el justificante de la
+  transferencia.
+</p>
+
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  Por último, si quieres olvidarte de tener que hacer la transferencia manualmente, te animamos a que nos mandes tu IBAN
+  para <strong>domiciliar tu cuota</strong>, y ya nos encargaríamos nosotros de todo.
+</p>
+
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  ¡Muchas gracias!
+</p>
+{% endblock content %}

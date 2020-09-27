@@ -7,7 +7,7 @@ from pythonspain.partners.models import Fee, Partner
 
 
 def import_consignments(source):
-    """Helper function to handle the import of consignments from the bank. Returns a 
+    """Helper function to handle the import of consignments from the bank. Returns a
     QuerySet of fees.
     """
     workbook = xlrd.open_workbook(file_contents=source.read())

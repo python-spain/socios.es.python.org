@@ -8,6 +8,6 @@ from pythonspain.partners.api import PartnerViewSet
 app_name = "api_v1"
 
 router = routers.DefaultRouter()
-router.register(r'partners', PartnerViewSet)
+router.register(r"partners", PartnerViewSet)
 
 urlpatterns = [path("", include(router.urls))]
