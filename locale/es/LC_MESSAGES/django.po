@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-27 09:08+0000\n"
+"POT-Creation-Date: 2020-10-03 17:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,11 +106,11 @@ msgstr "Lanzar exportaciones"
 msgid "has direct debit"
 msgstr "tiene domiciliación"
 
-#: pythonspain/partners/admin.py:70
+#: pythonspain/partners/admin.py:70 pythonspain/partners/admin.py:107
 msgid "Yes"
 msgstr "Sí"
 
-#: pythonspain/partners/admin.py:70
+#: pythonspain/partners/admin.py:70 pythonspain/partners/admin.py:107
 msgid "No"
 msgstr "No"
 
@@ -118,7 +118,11 @@ msgstr "No"
 msgid "last fee year"
 msgstr "año de última cuota"
 
-#: pythonspain/partners/admin.py:132
+#: pythonspain/partners/admin.py:103
+msgid "has right to vote"
+msgstr "tiene derecho a voto"
+
+#: pythonspain/partners/admin.py:150
 msgid "last fee date"
 msgstr "fecha de última cuota"
 

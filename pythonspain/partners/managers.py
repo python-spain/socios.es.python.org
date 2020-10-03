@@ -1,6 +1,6 @@
 from django.apps import apps
 from django.db import models
-from django.db.models import OuterRef, Subquery
+from django.db.models import OuterRef, Subquery, Q
 from django.utils import timezone
 
 
@@ -26,4 +26,13 @@ class PartnerQuerySet(models.QuerySet):
             self.active()
             .annotate_last_fee_date()
             .filter(last_fee_date__year__lt=today.year)
+        )
+
+    def right_to_vote(self):
+        """Get the list of partners that has right to vote, that is: is active and has
+        the fee up tp date, or is founder.
+        """
+        year = timezone.now().date().year
+        return self.annotate_last_fee_date().filter(
+            Q(is_founder=True) | Q(last_fee_date__year=year, is_active=True)
         )

@@ -71,7 +71,7 @@ class DirectDebitListFilter(admin.SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() is not None:
-            return queryset.direct_debit(self.value())
+            return queryset.direct_debit(self.value() == "True")
         return queryset
 
 
@@ -99,6 +99,23 @@ class LastFeeYearListFilter(admin.SimpleListFilter):
         return queryset
 
 
+class HasRightToVoteListFilter(admin.SimpleListFilter):
+    title = _("has right to vote")
+    parameter_name = "has_right_to_vote"
+
+    def lookups(self, request, model_admin):
+        return [(True, _("Yes")), (False, _("No"))]
+
+    def queryset(self, request, queryset):
+        if self.value() is not None:
+            if self.value() == "True":
+                return queryset.right_to_vote()
+            return queryset.exclude(
+                pk__in=queryset.right_to_vote().values_list("pk", flat=True)
+            )
+        return queryset
+
+
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
     readonly_fields = ("number",)
@@ -117,6 +134,7 @@ class PartnerAdmin(admin.ModelAdmin):
         "has_board_directors_charge",
         DirectDebitListFilter,
         LastFeeYearListFilter,
+        HasRightToVoteListFilter,
     ]
     search_fields = ["number", "name", "nif", "email"]
     inlines = [FeeInline, NoticeInline]
