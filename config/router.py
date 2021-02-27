@@ -4,7 +4,6 @@ from rest_framework import routers
 
 from pythonspain.partners.api import PartnerViewSet
 
-
 app_name = "api_v1"
 
 router = routers.DefaultRouter()

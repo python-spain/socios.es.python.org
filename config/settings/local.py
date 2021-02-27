@@ -26,7 +26,7 @@ CACHES = {
 # TEMPLATES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#templates
-TEMPLATES[0]["OPTIONS"]["debug"] = DEBUG  # noqa F405
+TEMPLATES[0]["OPTIONS"]["debug"] = DEBUG  # type: ignore
 
 # EMAIL
 # ------------------------------------------------------------------------------

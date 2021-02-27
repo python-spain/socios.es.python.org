@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 
@@ -9,7 +9,7 @@ from pythonspain.users.forms import RestorePasswordForm, User
 class RestorePasswordView(View):
     """View to handle the restore of the password."""
 
-    template_name = "users/restore_password.html"
+    template_name: str = "users/restore_password.html"
     form_class = RestorePasswordForm
 
     def get(self, request, restore_password_code):
@@ -29,7 +29,7 @@ class RestorePasswordView(View):
 class VerifiedView(View):
     """View to handle verification of users."""
 
-    template_name = "users/verified.html"
+    template_name: str = "users/verified.html"
 
     def get(self, request, verification_code):
         user = get_object_or_404(User, verification_code=verification_code)

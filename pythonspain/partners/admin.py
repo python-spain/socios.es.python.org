@@ -13,11 +13,11 @@ from pythonspain.partners.models import (
 
 def send_reminder_fee_action(modeladmin, request, queryset):
     for partner in queryset.delayed_fee():
-        partner.send_reminder_fee()
+        partner.create_and_send_notice()
     modeladmin.message_user(request, _("Reminder fee email sent!"))
 
 
-send_reminder_fee_action.short_description = _("Send reinder fee email")
+send_reminder_fee_action.short_description = _("Send reinder fee email")  # type: ignore
 
 
 def send_welcome_action(modeladmin, request, queryset):
@@ -26,7 +26,7 @@ def send_welcome_action(modeladmin, request, queryset):
     modeladmin.message_user(request, _("Welcome email sent!"))
 
 
-send_welcome_action.short_description = _("Send welcome email")
+send_welcome_action.short_description = _("Send welcome email")  # type: ignore
 
 
 def export_action(modeladmin, request, queryset):
@@ -36,7 +36,7 @@ def export_action(modeladmin, request, queryset):
     modeladmin.message_user(request, _("Launched export tasks..."))
 
 
-export_action.short_description = _("Launch exports")
+export_action.short_description = _("Launch exports")  # type: ignore
 
 
 @admin.register(Fee)
@@ -147,8 +147,8 @@ class PartnerAdmin(admin.ModelAdmin):
     def last_fee_date(self, instance):
         return instance.last_fee_date
 
-    last_fee_date.short_description = _("last fee date")
-    last_fee_date.admin_order_field = "last_fee_date"
+    last_fee_date.short_description = _("last fee date")  # type: ignore
+    last_fee_date.admin_order_field = "last_fee_date"  # type: ignore
 
 
 @admin.register(Member)

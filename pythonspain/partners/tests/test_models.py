@@ -4,7 +4,7 @@ from dateutil.relativedelta import relativedelta
 from django.core.exceptions import ValidationError
 from test_plus import TestCase
 
-from pythonspain.partners.models import Partner, PartnerExport, MemberExport
+from pythonspain.partners.models import MemberExport, Partner, PartnerExport
 from pythonspain.partners.tests.factories import (
     FeeFactory,
     MemberExportFactory,

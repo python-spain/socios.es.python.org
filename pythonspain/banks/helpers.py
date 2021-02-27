@@ -1,12 +1,16 @@
 import datetime
+from typing import TYPE_CHECKING
 
 import xlrd
 
 from pythonspain.partners.constants import DIRECT_DEBIT
 from pythonspain.partners.models import Fee, Partner
 
+if TYPE_CHECKING:
+    from io import StringIO
 
-def import_consignments(source):
+
+def import_consignments(source: "StringIO"):
     """Helper function to handle the import of consignments from the bank. Returns a
     QuerySet of fees.
     """

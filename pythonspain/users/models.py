@@ -69,18 +69,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         super().clean()
         self.email = self.__class__.objects.normalize_email(self.email)
 
-    def get_full_name(self):
+    def get_full_name(self) -> str:
         """
         Return the first_name plus the last_name, with a space in between.
         """
         full_name = "%s %s" % (self.first_name, self.last_name)
         return full_name.strip()
 
-    def get_short_name(self):
+    def get_short_name(self) -> str:
         """Return the short name for the user."""
         return self.first_name
 
-    def generate_random_code(self):
+    def generate_random_code(self) -> str:
         """Generates a restore password code."""
         return hashlib.sha256(
             ("{}-{}-{}".format(self.email, time.time(), random.randint(0, 10))).encode(
@@ -96,7 +96,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         email = RestorePasswordEmail(to=self.email, context={"user": self})
         email.send()
 
-    def reset_verification(self, commit=False):
+    def reset_verification(self, commit: bool = False):
         """Resets the email verification."""
         self.is_email_verified = False
         self.verification_code = self.generate_random_code()
@@ -131,8 +131,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             self.verification_code is None or self.verification_code.strip() == ""
         ):
             self.verification_code = self.generate_random_code()
-        result = super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
         # For every inserts, sends a verification email (excepts superusers)
         if is_insert and not self.is_email_verified and not self.is_superuser:
             self.send_verification()
-        return result

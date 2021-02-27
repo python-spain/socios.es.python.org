@@ -9,7 +9,7 @@ from options.models import Option
 
 from pythonspain.core.models import BaseExport
 from pythonspain.partners.constants import CHARGES, PAYMENT_METHODS, WIRE_TRANSFER
-from pythonspain.partners.emails import ReminderFee, PartnerWelcomeEmail
+from pythonspain.partners.emails import PartnerWelcomeEmail, ReminderFee
 from pythonspain.partners.helpers import export_members, export_partners
 from pythonspain.partners.managers import PartnerQuerySet
 from pythonspain.partners.tasks import member_export_task, partner_export_task
@@ -81,19 +81,11 @@ class Partner(TimeStampedModel):
         email = PartnerWelcomeEmail(to=self.email, context={"partner": self})
         email.send()
 
-    def send_reminder_fee(self):
-        """Sends the reminder fee email."""
-        treasury_email = Option.objects.get_value(
-            "treasury_email", default="tesoreria@es.python.org"
-        )
-        last_fee = self.fees.order_by("-date").first()
-        email = ReminderFee(
-            to=self.email,
-            from_email=f"Tesorería Python España <{treasury_email}>",
-            reply_to=treasury_email,
-            context={"partner": self, "last_fee": last_fee},
-        )
-        email.send()
+    def create_and_send_notice(self) -> "Notice":
+        """Creates a notice for this partner."""
+        notice = Notice.objects.create(partner=self)
+        notice.send()
+        return notice
 
     def save(self, *args, **kwargs):
         self.clean()
@@ -136,7 +128,7 @@ class Fee(TimeStampedModel):
 
 
 class Notice(TimeStampedModel):
-    """A notice sent to a partner."""
+    """A notice sent to a partner to remember the fee."""
 
     partner = models.ForeignKey(
         "partners.Partner",
@@ -155,6 +147,20 @@ class Notice(TimeStampedModel):
 
     def __str__(self):
         return str(self.date)
+
+    def send(self):
+        """Sends the reminder fee email."""
+        treasury_email = Option.objects.get_value(
+            "treasury_email", default="tesoreria@es.python.org"
+        )
+        last_fee = self.partner.fees.order_by("-date").first()
+        email = ReminderFee(
+            to=self.partner.email,
+            from_email=f"Tesorería Python España <{treasury_email}>",
+            reply_to=treasury_email,
+            context={"partner": self.partner, "last_fee": last_fee},
+        )
+        email.send()
 
 
 class Member(TimeStampedModel):

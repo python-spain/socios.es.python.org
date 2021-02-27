@@ -1,7 +1,14 @@
+from typing import TYPE_CHECKING
+
 from pythonspain.core.helpers import basic_exporter
 
+if TYPE_CHECKING:
+    from io import StringIO
 
-def export_partners(queryset, output):
+    from pythonspain.partners.managers import PartnerQuerySet
+
+
+def export_partners(queryset: "PartnerQuerySet", output: "StringIO") -> int:
     fieldnames = [
         "number",
         "nif",

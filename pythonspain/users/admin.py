@@ -14,7 +14,9 @@ def send_restore_code_action(modeladmin, request, queryset):
     modeladmin.message_user(request, _("Restore password codes sent!"))
 
 
-send_restore_code_action.short_description = _("Send restore password code")
+send_restore_code_action.short_description = _(  # type: ignore
+    "Send restore password code"
+)
 
 
 def send_verification_action(modeladmin, request, queryset):
@@ -24,7 +26,9 @@ def send_verification_action(modeladmin, request, queryset):
     modeladmin.message_user(request, _("Email verification sent!"))
 
 
-send_verification_action.short_description = _("Send email verification")
+send_verification_action.short_description = _(  # type: ignore
+    "Send email verification"
+)
 
 
 @admin.register(User)

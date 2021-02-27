@@ -1,7 +1,15 @@
 import csv
+from typing import TYPE_CHECKING, List
+
+if TYPE_CHECKING:
+    from io import StringIO
+
+    from django.db import models
 
 
-def basic_exporter(queryset, output, fieldnames):
+def basic_exporter(
+    queryset: "models.QuerySet", output: "StringIO", fieldnames: List
+) -> int:
     writer = csv.DictWriter(output, fieldnames=fieldnames, delimiter=",")
     writer.writeheader()
     items = 0

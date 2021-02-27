@@ -1,6 +1,5 @@
 from django.utils.translation import gettext_lazy as _
 
-
 PRESIDENT, VICE_PRESIDENT, SECRETARY, TREASURER, VOCAL = (
     "president",
     "vicepresident",

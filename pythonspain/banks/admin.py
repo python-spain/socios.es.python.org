@@ -11,7 +11,7 @@ def import_action(modeladmin, request, queryset):
     modeladmin.message_user(request, _("Launched import consignments tasks..."))
 
 
-import_action.short_description = _("Import consignments")
+import_action.short_description = _("Import consignments")  # type: ignore
 
 
 @admin.register(ConsignmentImport)

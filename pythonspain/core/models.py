@@ -1,5 +1,6 @@
 import io
 import logging
+from typing import Callable
 
 from django.core.files.base import ContentFile
 from django.db import models
@@ -37,7 +38,7 @@ class BaseImport(TimeStampedModel):
     def __str__(self):
         return f"Import #{self.pk}"
 
-    def source(self):
+    def source(self) -> "io.BytesIO":
         """Creates the source for the importer using the data file."""
         file_content = self.data.read()
         source = io.BytesIO()
@@ -45,11 +46,11 @@ class BaseImport(TimeStampedModel):
         source.seek(0)
         return source
 
-    def importer(self):
+    def importer(self) -> Callable:
         """Gets the import helper function that does the import."""
         raise NotImplementedError()
 
-    def importer_task(self):
+    def importer_task(self) -> Callable:
         """Gets the async task that does the import."""
         raise NotImplementedError()
 
