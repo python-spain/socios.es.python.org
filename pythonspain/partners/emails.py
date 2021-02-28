@@ -12,12 +12,12 @@ class PartnerWelcomeEmail(TemplateEmailMessage):
 class LateFeeReminder(TemplateEmailMessage):
     """Email for partners with reminder fee."""
 
-    default_template_name = "emails/reminder_delay.html"
+    default_template_name = "emails/reminder_late.html"
     default_subject = _("Late fee reminder")
 
 
 class AnnualFeeReminder(TemplateEmailMessage):
     """Email for partners with reminder fee."""
 
-    default_template_name = "emails/reminder_yearly.html"
+    default_template_name = "emails/reminder_annual.html"
     default_subject = _("Annual fee reminder")
