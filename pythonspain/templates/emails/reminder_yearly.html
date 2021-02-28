@@ -1,0 +1,36 @@
+{% extends "emails/base.html" %}
+{% load i18n %}
+{% block content %}
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  ¡Hola {{ partner.get_short_name }}!</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  Parece que ya toca la <strong>renovación de la cuota de Python España</strong>. Para hacerlo sólo tendrías
+  que hacer una
+  <strong>transferencia de 30€</strong> a la cuenta
+  de la asociación:
+</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: bold; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  ES18 1491 0001 2230 0008 5378
+</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  Indicando en el concepto el <strong>número de socio o DNI/NIE</strong> y destinatario "Asociación Python España".
+</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  Después, mándanos un correo a <a href="mailto:tesoreria@es.python.org">tesorería</a>, <strong>adjuntando el
+    justificante de la transferencia</strong> e indicando en el <strong>asunto "Renovación cuota"</strong>.
+</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  Por último, si quieres olvidarte de tener que hacer la transferencia manualmente, te animamos a que nos mandes tu IBAN
+  para <strong>domiciliar tu cuota</strong> y ya nos encargaríamos nosotros de todo.
+</p>
+<p
+  style="color: #222222; font-family: 'Helvetica', 'Arial', sans-serif; font-size: 14px; font-weight: normal; line-height: 19px; margin: 0; margin-bottom: 10px; padding: 0; text-align: left;">
+  ¡Muchas gracias por seguir con nosotros!
+</p>
+{% endblock content %}

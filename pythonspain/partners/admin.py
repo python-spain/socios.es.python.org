@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
+from pythonspain.partners.constants import ANNUAL, LATE
 from pythonspain.partners.models import (
     Fee,
     Member,
@@ -11,13 +12,22 @@ from pythonspain.partners.models import (
 )
 
 
-def send_reminder_fee_action(modeladmin, request, queryset):
+def send_late_fee_reminder_email_action(modeladmin, request, queryset):
     for partner in queryset.delayed_fee():
-        partner.create_and_send_notice()
-    modeladmin.message_user(request, _("Reminder fee email sent!"))
+        partner.create_and_send_notice(kind=LATE)
+    modeladmin.message_user(request, _("Late fee reminder sent!"))
 
 
-send_reminder_fee_action.short_description = _("Send reinder fee email")  # type: ignore
+send_late_fee_reminder_email_action.short_description = _("Send delayed fee reminder email")  # type: ignore
+
+
+def send_annual_fee_reminder_action(modeladmin, request, queryset):
+    for partner in queryset.pending_wire_transfer_fee():
+        partner.create_and_send_notice(kind=ANNUAL)
+    modeladmin.message_user(request, _("Annual reminder sent!"))
+
+
+send_annual_fee_reminder_action.short_description = _("Send annual fee reminder email")  # type: ignore
 
 
 def send_welcome_action(modeladmin, request, queryset):
@@ -138,7 +148,11 @@ class PartnerAdmin(admin.ModelAdmin):
     ]
     search_fields = ["number", "name", "nif", "email"]
     inlines = [FeeInline, NoticeInline]
-    actions = [send_welcome_action, send_reminder_fee_action]
+    actions = [
+        send_welcome_action,
+        send_annual_fee_reminder_action,
+        send_late_fee_reminder_email_action,
+    ]
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)

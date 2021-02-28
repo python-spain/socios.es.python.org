@@ -1,5 +1,6 @@
 import datetime
 import re
+from typing import TYPE_CHECKING, Dict
 
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -8,11 +9,25 @@ from model_utils.models import TimeStampedModel
 from options.models import Option
 
 from pythonspain.core.models import BaseExport
-from pythonspain.partners.constants import CHARGES, PAYMENT_METHODS, WIRE_TRANSFER
-from pythonspain.partners.emails import PartnerWelcomeEmail, ReminderFee
+from pythonspain.partners.constants import (
+    ANNUAL,
+    CHARGES,
+    LATE,
+    NOTICE_TYPES,
+    PAYMENT_METHODS,
+    WIRE_TRANSFER,
+)
+from pythonspain.partners.emails import (
+    AnnualFeeReminder,
+    LateFeeReminder,
+    PartnerWelcomeEmail,
+)
 from pythonspain.partners.helpers import export_members, export_partners
 from pythonspain.partners.managers import PartnerQuerySet
 from pythonspain.partners.tasks import member_export_task, partner_export_task
+
+if TYPE_CHECKING:
+    from snitch.emails import TemplateEmailMessage
 
 
 class Partner(TimeStampedModel):
@@ -61,12 +76,11 @@ class Partner(TimeStampedModel):
     def clean(self):
         # Set number if is empty
         if not self.number:
-            n = 1
+            number = 1
             last = self.__class__.objects.order_by("number").last()
             if last:
-                n += last.get_number()
-
-            self.number = f"PYES-{n:04}"
+                number += last.get_number()
+            self.number = f"PYES-{number:04}"
 
         # Check number format
         if not re.match(r"PYES-[0-9]{4}", self.number):
@@ -81,9 +95,9 @@ class Partner(TimeStampedModel):
         email = PartnerWelcomeEmail(to=self.email, context={"partner": self})
         email.send()
 
-    def create_and_send_notice(self) -> "Notice":
+    def create_and_send_notice(self, kind: str) -> "Notice":
         """Creates a notice for this partner."""
-        notice = Notice.objects.create(partner=self)
+        notice = Notice.objects.create(partner=self, kind=kind)
         notice.send()
         return notice
 
@@ -130,6 +144,9 @@ class Fee(TimeStampedModel):
 class Notice(TimeStampedModel):
     """A notice sent to a partner to remember the fee."""
 
+    kind = models.CharField(
+        _("kind"), choices=NOTICE_TYPES, max_length=16, default=LATE
+    )
     partner = models.ForeignKey(
         "partners.Partner",
         related_name="notices",
@@ -148,17 +165,24 @@ class Notice(TimeStampedModel):
     def __str__(self):
         return str(self.date)
 
+    def _notice_email_context(self) -> Dict:
+        last_fee = self.partner.fees.order_by("-date").first()
+        return {"partner": self.partner, "last_fee": last_fee}
+
+    def _email_class(self) -> "TemplateEmailMessage":
+        email_classes = {LATE: LateFeeReminder, ANNUAL: AnnualFeeReminder}
+        return email_classes.get(self.kind)
+
     def send(self):
         """Sends the reminder fee email."""
         treasury_email = Option.objects.get_value(
             "treasury_email", default="tesoreria@es.python.org"
         )
-        last_fee = self.partner.fees.order_by("-date").first()
-        email = ReminderFee(
+        email = self._email_class()(
             to=self.partner.email,
             from_email=f"Tesorería Python España <{treasury_email}>",
             reply_to=treasury_email,
-            context={"partner": self.partner, "last_fee": last_fee},
+            context=self._notice_email_context(),
         )
         email.send()
 

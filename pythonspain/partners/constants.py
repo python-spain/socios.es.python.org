@@ -22,3 +22,10 @@ PAYMENT_METHODS = (
     (WIRE_TRANSFER, _("Wire transfer")),
     (DIRECT_DEBIT, _("Direct debit")),
 )
+
+
+LATE, ANNUAL = "late", "annual"
+NOTICE_TYPES = (
+    (LATE, _("Late")),
+    (ANNUAL, _("Annual")),
+)

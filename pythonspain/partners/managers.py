@@ -28,6 +28,33 @@ class PartnerQuerySet(models.QuerySet):
         """Filters partners with direct debit or not."""
         return self.filter(bank_account__isnull=not value)
 
+    def first_direct_debit_fee(self) -> "PartnerQuerySet":
+        """Gets the parthners that has to pay the first direct debit fee."""
+        return (
+            self.annotate_direct_debit_fees()
+            .filter(direct_debit_fees_count=0)
+            .direct_debit()
+            .active()
+        )
+
+    def renew_direct_debit_fee(self) -> "PartnerQuerySet":
+        """Gets the partherns that has to renew de fee using direct debit."""
+        return (
+            self.annotate_direct_debit_fees()
+            .filter(direct_debit_fees_count_gt=0)
+            .direct_debit()
+            .active()
+        )
+
+    def pending_wire_transfer_fee(self) -> "PartnerQuerySet":
+        """Gets the partherns that has to pay the fee using wire transfer."""
+        today = timezone.now().date()
+        return (
+            self.annotate_last_fee_date()
+            .direct_debit(False)
+            .filter(last_fee_date__year__lt=today.year)
+        )
+
     def annotate_last_fee_date(self) -> "PartnerQuerySet":
         """Adds to the queryset the last date of a paid fee."""
         Fee = apps.get_model("partners.Fee")
