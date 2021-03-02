@@ -52,6 +52,7 @@ class PartnerQuerySet(models.QuerySet):
         return (
             self.annotate_last_fee_date()
             .direct_debit(False)
+            .active()
             .filter(last_fee_date__year__lt=today.year)
         )
 
