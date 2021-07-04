@@ -1,6 +1,7 @@
 import datetime
 import re
 from typing import TYPE_CHECKING, Dict
+from functools import partial
 
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -30,6 +31,11 @@ if TYPE_CHECKING:
     from snitch.emails import TemplateEmailMessage
 
 
+def partner_files_directory_path(subdir, instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return "partners/{instance.number}/{subdir}/{filename}"
+
+
 class Partner(TimeStampedModel):
     """A partner is a person who is paying the partner fee."""
 
@@ -50,10 +56,23 @@ class Partner(TimeStampedModel):
     )
     is_founder = models.BooleanField(_("is founder"), default=False)
     is_active = models.BooleanField(_("is active"), default=True)
-    comment = models.TextField(_("comment"), null=True, blank=True)
+    comment = models.TextField(_("comment"), blank=True, null=True)
     bank_account = models.CharField(
         _("bank account"), max_length=30, blank=True, null=True
     )
+    identity_doc = models.FileField(
+        _("identity document"),
+        upload_to=partial(partner_files_directory_path, "identity_doc"),
+        blank=True, null=True
+    )
+    first_payment_doc = models.FileField(
+        _("first payment document"),
+        upload_to=partial(partner_files_directory_path, "first_payment_doc"),
+        null=True, blank=True
+    )
+    is_rgpd_consent = models.BooleanField(_("is RGPD consent"), default=True)
+    allow_notifications = models.BooleanField(_("allow sent notificacions"),
+                                              default=True)
 
     objects = PartnerQuerySet.as_manager()
 
