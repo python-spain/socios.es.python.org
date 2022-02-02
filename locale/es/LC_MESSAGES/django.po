@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-28 13:29+0000\n"
+"POT-Creation-Date: 2022-02-01 19:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,17 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: config/settings/base.py:47
+#: config/settings/base.py:48
 msgid "English"
 msgstr "Inglés"
 
-#: config/settings/base.py:47
+#: config/settings/base.py:48
 msgid "Spanish"
 msgstr "Español"
 
-#: config/urls.py:16
-msgid "Python Spain Admin"
-msgstr "Panel de administración de Python España"
+#: config/urls.py:14
+msgid "Python Spain"
+msgstr "Python España"
 
 #: pythonspain/banks/admin.py:11
 msgid "Launched import consignments tasks..."
@@ -115,10 +115,12 @@ msgid "has direct debit"
 msgstr "tiene domiciliación"
 
 #: pythonspain/partners/admin.py:80 pythonspain/partners/admin.py:117
+#: pythonspain/partners/admin.py:134
 msgid "Yes"
 msgstr "Sí"
 
 #: pythonspain/partners/admin.py:80 pythonspain/partners/admin.py:117
+#: pythonspain/partners/admin.py:134
 msgid "No"
 msgstr "No"
 
@@ -130,7 +132,11 @@ msgstr "año de última cuota"
 msgid "has right to vote"
 msgstr "tiene derecho a voto"
 
-#: pythonspain/partners/admin.py:164
+#: pythonspain/partners/admin.py:130
+msgid "has delayed fee"
+msgstr "tiene cuota atrasada"
+
+#: pythonspain/partners/admin.py:182
 msgid "last fee date"
 msgstr "fecha de última cuota"
 

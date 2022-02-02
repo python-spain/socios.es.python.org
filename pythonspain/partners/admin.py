@@ -126,6 +126,23 @@ class HasRightToVoteListFilter(admin.SimpleListFilter):
         return queryset
 
 
+class HasDelayedFeeListFilter(admin.SimpleListFilter):
+    title = _("has delayed fee")
+    parameter_name = "has_delayed_fee"
+
+    def lookups(self, request, model_admin):
+        return [(True, _("Yes")), (False, _("No"))]
+
+    def queryset(self, request, queryset):
+        if self.value() is not None:
+            if self.value() == "True":
+                return queryset.delayed_fee()
+            return queryset.exclude(
+                pk__in=queryset.delayed_fee().values_list("pk", flat=True)
+            )
+        return queryset
+
+
 @admin.register(Partner)
 class PartnerAdmin(admin.ModelAdmin):
     readonly_fields = ("number",)
@@ -144,6 +161,7 @@ class PartnerAdmin(admin.ModelAdmin):
         "has_board_directors_charge",
         DirectDebitListFilter,
         LastFeeYearListFilter,
+        HasDelayedFeeListFilter,
         HasRightToVoteListFilter,
     ]
     search_fields = ["number", "name", "nif", "email"]

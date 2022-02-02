@@ -4,16 +4,14 @@ from django.contrib import admin
 from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
 from django.views import defaults as default_views
-from django.views.generic import TemplateView
 from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
     path("users/", include("pythonspain.users.urls", namespace="users")),
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Django Admin, use {% url "admin:index" %}
-admin.site.site_header = _("Python Spain Admin")
+admin.site.site_header = _("Python Spain")
 urlpatterns += [path(settings.ADMIN_URL, admin.site.urls)]
 
 # API URLs

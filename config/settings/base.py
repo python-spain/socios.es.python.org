@@ -41,7 +41,8 @@ USE_I18N = True
 USE_L10N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
-
+# https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOCALE_PATHS = [str(ROOT_DIR.path("locale"))]
 LANGUAGES = [("en", _("English")), ("es", _("Spanish"))]
@@ -214,7 +215,7 @@ EMAIL_BACKEND = env(
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL.
-ADMIN_URL = "admin/"
+ADMIN_URL = ""
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = [("""Marcos Gabarda""", "hey@marcosgabarda.com")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers

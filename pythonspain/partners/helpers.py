@@ -17,6 +17,7 @@ def export_partners(queryset: "PartnerQuerySet", output: "StringIO") -> int:
         "email",
         "request_date",
         "approval_date",
+        "bank_account",
         "has_board_directors_charge",
         "charge",
         "is_founder",
